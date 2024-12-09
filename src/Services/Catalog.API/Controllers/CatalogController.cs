@@ -1,5 +1,6 @@
 ﻿using Catalog.API.Interfaces.Manager;
 using Catalog.API.Models;
+using CoreApiResponse;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -8,7 +9,7 @@ namespace Catalog.API.Controllers
 {
     
     [ApiController]
-    public class CatalogController : ControllerBase
+    public class CatalogController : BaseController
     {
         IProductManager _productManager;
         public CatalogController(IProductManager productManager) {
@@ -23,7 +24,7 @@ namespace Catalog.API.Controllers
         public IActionResult GetProducts()
         {
             var product = _productManager.GetAll();
-            return Ok(product);
+            return CustomResult(product,HttpStatusCode.Accepted);
 
 
         }
